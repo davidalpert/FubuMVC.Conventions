@@ -26,7 +26,7 @@ desc "Compiles and runs unit tests"
 task :all => [:default]
 
 desc "**Default**, compiles and runs tests"
-task :default => [:compile, :unit_tests]
+task :default => [:compile, :unit_tests, :release]
 
 desc "Update the version information for the build"
 assemblyinfo :version do |asm|
@@ -75,4 +75,18 @@ desc "Runs unit tests"
 task :unit_tests do
   runner = NUnitRunner.new :compilemode => COMPILE_TARGET, :source => 'src', :platform => 'x86', :results => RESULTS_DIR
   runner.executeTests ['FubuMVC.Conventions.Tests']
+end
+
+task :release do
+	copyOutputFiles "src/FubuMVC.Conventions/bin/#{COMPILE_TARGET}", "FubuMVC.Conventions*.{dll,pdb}", props[:archive]
+	archive = Dir.glob(props[:archive])
+	FileList["fubumvc.conventions.nuspec"].each do |spec|
+      sh "lib/NuGet.exe pack #{spec} -o #{archive} -Version #{BUILD_NUMBER} -Symbols"
+    end
+end
+
+def copyOutputFiles(fromDir, filePattern, outDir)
+  Dir.glob(File.join(fromDir, filePattern)){|file| 		
+	copy(file, outDir) if File.file?(file)
+  } 
 end

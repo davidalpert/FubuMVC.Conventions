@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>FubuMVC.Conventions</id>
+    <version>0.0.0</version>
+    <authors>Joshua Arnold, et al.</authors>
+    <owners>Joshua Arnold</owners>
+    <licenseUrl>https://github.com/jmarnold/FubuMVC.Conventions/raw/master/license.txt</licenseUrl>
+    <projectUrl>http://fubumvc.com</projectUrl>
+    <iconUrl>https://github.com/DarthFubuMVC/fubumvc/raw/master/doc/logo/FubuMVC_Logo_package_icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Take control of your routing.</description>
+    <tags>fubumvc</tags>
+    <dependencies>
+      <dependency id="FubuMVC.References" version="0.9.1.533" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="build\FubuMVC.Conventions.*" target="lib" />
+  </files>
+</package>
