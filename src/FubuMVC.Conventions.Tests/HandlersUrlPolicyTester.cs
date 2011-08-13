@@ -77,5 +77,16 @@ namespace FubuMVC.Conventions.Tests
                 .CreateUrlFromParameters(parameters)
                 .ShouldEqual("posts/2011/7/hello-world");
         }
+
+        [Test]
+        public void should_match_constrained_route_even_if_parameters_are_not_provided()
+        {
+            var input = _policy.Build(ObjectMother.HandlerWithOptionalRouteInput()).Input;
+            var parameters = new RouteParameters();
+
+            input
+                .CreateUrlFromParameters(parameters)
+                .ShouldEqual("posts/category/");
+        }
     }
 }

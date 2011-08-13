@@ -77,6 +77,7 @@ namespace FubuMVC.Conventions
                                  ? new TypeDescriptorCache().GetPropertiesFor(call.InputType()).Keys
                                  : new string[0];
 
+                // TODO: verify behavior when route parameters are optional
                 MethodToUrlBuilder.Alter(routeDefinition, handlerName, properties, text => { });
 
                 if (call.HasInput)

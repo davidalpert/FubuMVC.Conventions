@@ -1,6 +1,7 @@
 using FubuMVC.Conventions.Tests.Handlers.Posts;
 using FubuMVC.Conventions.Tests.Handlers.Posts.Create;
 using FubuMVC.Core.Registration.Nodes;
+using FubuMVC.Conventions.Tests.Handlers.Posts.Category;
 
 namespace FubuMVC.Conventions.Tests
 {
@@ -28,6 +29,11 @@ namespace FubuMVC.Conventions.Tests
         public static ActionCall HandlerWithRouteInput()
         {
             return ActionCall.For<get_Year_Month_Title_handler>(h => h.Execute(new ViewPostRequestModel()));
+        }
+
+        public static ActionCall HandlerWithOptionalRouteInput()
+        {
+            return ActionCall.For<get_CategoryName_handler>(h => h.Execute(new ViewPostsByCategoryRequestModel { CategoryName = "default" }));
         }
     }
 }

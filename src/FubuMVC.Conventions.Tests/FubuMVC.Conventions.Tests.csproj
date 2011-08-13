@@ -89,6 +89,7 @@
     <Compile Include="HandlersUrlPolicyTester.cs" />
     <Compile Include="Handlers\HandlersMarker.cs" />
     <Compile Include="Handlers\JsonResponse.cs" />
+    <Compile Include="Handlers\Posts\Category\get_CategoryName_handler.cs" />
     <Compile Include="Handlers\Posts\ComplexRoute\GetHandler.cs" />
     <Compile Include="Handlers\Posts\Create\GetHandler.cs" />
     <Compile Include="Handlers\Posts\get_Year_Month_Title_handler.cs" />

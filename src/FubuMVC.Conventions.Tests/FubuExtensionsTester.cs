@@ -11,13 +11,14 @@ namespace FubuMVC.Conventions.Tests
         [Test]
         public void should_include_handlers()
         {
-            var graph = new FubuRegistry(x => x.ApplyHandlerConventions(typeof (Handlers.HandlersMarker))).BuildGraph();
+            var graph = new FubuRegistry(x => x.ApplyHandlerConventions(typeof(Handlers.HandlersMarker))).BuildGraph();
             var routes = new List<string>
                              {
                                  "posts/create",
                                  "posts/complex-route",
                                  "some-crazy-url/as-a-subfolder",
-                                 "posts/{Year}/{Month}/{Title}"
+                                 "posts/{Year}/{Month}/{Title}",
+                                 "posts/category/{CategoryName}"
                              };
 
             routes
