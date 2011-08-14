@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -83,7 +84,7 @@ namespace FubuMVC.Conventions
                 if (call.HasInput)
                 {
                     routeDefinition.ApplyInputType(call.InputType());
-                    routeDefinition.Input.RouteParameters.Each(parameter => parameter.DefaultValue = parameter.DefaultValue ?? String.Empty);
+                    EnsureLastRouteParameterIsOptional(routeDefinition);
                 }
             }
             else
@@ -112,6 +113,15 @@ namespace FubuMVC.Conventions
             return routeBuilder
                 .ToString()
                 .ToLower();
+        }
+
+        private static void EnsureLastRouteParameterIsOptional(IRouteDefinition routeDefinition)
+        {
+            var lastParameter = routeDefinition.Input.RouteParameters.LastOrDefault();
+            if (lastParameter != null)
+            {
+                lastParameter.DefaultValue = lastParameter.DefaultValue ?? String.Empty;
+            }
         }
     }
 }

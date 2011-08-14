@@ -79,7 +79,7 @@ namespace FubuMVC.Conventions.Tests
         }
 
         [Test]
-        public void should_match_constrained_route_even_if_parameters_are_not_provided()
+        public void should_match_constrained_route_even_if_a_parameter_is_not_provided()
         {
             var input = _policy.Build(ObjectMother.HandlerWithOptionalRouteInput()).Input;
             var parameters = new RouteParameters();
@@ -87,6 +87,19 @@ namespace FubuMVC.Conventions.Tests
             input
                 .CreateUrlFromParameters(parameters)
                 .ShouldEqual("posts/category/");
+        }
+
+        [Test]
+        public void should_allow_the_last_route_parameter_to_be_optional_when_constraining_routes_by_MethodToUrlBuilder()
+        {
+            var input = _policy.Build(ObjectMother.HandlerWithRouteInput()).Input;
+            var parameters = new RouteParameters();
+            parameters["Year"] = "2011";
+            parameters["Month"] = "7";
+
+            input
+                .CreateUrlFromParameters(parameters)
+                .ShouldEqual("posts/2011/7/");
         }
     }
 }
