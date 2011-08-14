@@ -1,0 +1,3 @@
+[submodule "lib/fubumvc"]
+	path = lib/fubumvc
+	url = git@github.com:davidalpert/fubumvc.git

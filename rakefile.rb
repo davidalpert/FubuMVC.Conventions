@@ -1,4 +1,10 @@
 include FileTest
+require 'FileUtils'
+
+fubumvc_root = File.join(File.dirname(__FILE__), 'lib', 'fubumvc')
+fubumvc_sln = File.join(fubumvc_root,'src','FubuMVC.sln')
+raise "Run `git submodule update --init` to populate the lib/fubumvc folder." unless File.exists? fubumvc_sln
+
 
 require 'rubygems'
 require 'zip/zip'
@@ -6,7 +12,6 @@ require 'zip/zipfilesystem'
 require 'albacore'
 require 'rexml/document'
 include REXML
-require 'FileUtils'
 
 require "support/buildUtils.rb"
 load "VERSION.txt"
@@ -65,10 +70,15 @@ task :clean do
 end
 
 desc "Compiles the app"
-msbuild :compile => [:clean, :version] do |msb|
+msbuild :compile => [:clean, :version, :compile_fubumvc] do |msb|
+
   msb.properties :configuration => COMPILE_TARGET
   msb.targets :Clean, :Build
   msb.solution = "src/#{ROOT_NAMESPACE}.sln"
+end
+
+task :compile_fubumvc do
+	`pushd . && cd #{fubumvc_root} && git submodule update --init && rake compile && popd`
 end
 
 desc "Runs unit tests"
