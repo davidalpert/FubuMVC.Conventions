@@ -83,6 +83,7 @@ namespace FubuMVC.Conventions
                 if (call.HasInput)
                 {
                     routeDefinition.ApplyInputType(call.InputType());
+                    routeDefinition.Input.RouteParameters.Each(parameter => parameter.DefaultValue = parameter.DefaultValue ?? String.Empty);
                 }
             }
             else
